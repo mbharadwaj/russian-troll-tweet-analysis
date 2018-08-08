@@ -60,7 +60,7 @@ configuration. If the credentials for translate is not in the "default", the cod
 Setup access to API by following documentation from Microsoft
 https://docs.microsoft.com/en-us/azure/cognitive-services/translator/translator-text-how-to-signup
 
-## Analysis
+## Experiments and Analysis
 
 ### Jupyter notebook
 
@@ -80,7 +80,17 @@ Category "NonEnglish" is the one of interest for this analysis.
 
 * The text "content" in the "NonEnglish" caterogy is translated to English
      * The "source" language is not specified in invoking the APIs
-     * This is to test the 
+     * This is to test the capability of the different translate APIs
+
+#### Results
+
+* "aws_translated" folder has a sample of data that was translated with AWS      
+* "azure_translated" folder has a sample of data that was translated with Azure      
+* "gcp_translated" folder has a sample of data that was translated with GCP
+
+The translation APIs are pricey. All of them charge by characters. 
+
+For reference, all the translations in the "gcp_translated" cost about $100.      
      
 #### Observations
 
@@ -97,7 +107,49 @@ Category "NonEnglish" is the one of interest for this analysis.
      * Further needs a subscription "tier" to be picked
      * Finally a resource group has to be created 
 
+## Classification using cloud ML
+
+For all classification experiments data was prepared by selecting English content from "classified".
+The file name has the category and this extracted and a CSV created with just the content and category.
+The training data has 250 samples for each cateory.
+
+Refer to [./prepare_data_for_cloud_ml.py](./prepare_data_for_cloud_ml.py)
+
+The training data is created in [./cloud_ml/training_data.csv](./cloud_ml/training_data.csv)
+
+### GCP
+
+AutoML is the newest service offered by GCP. 
+
+The training data csv was uploaded via AutoML UI. AutoML takes a while to ingest the data (order of 10s of minutes).
+The next stage was training and it took hours.
+
+### AWS
+
+"Machine Learning" is the name of the service. 
+
+Steps:
+* Upload model to to S3 via AWS console
+* Follow the steps in the Machine Learning console
+
+Observations:
+* The steps were straight-forward
+* The model was created quite fast (order of minutes).
+* The model had an F1 score of 60 
+ 
 ## To Do
 
 * Compare translations from each platform
-     * Manual validation (spot check)                  
+     * Manual validation (spot check)
+     
+### AWS
+* Play around with the training data to increase F1
+
+### GCP
+
+### Azure
+* Use ML APIs with training data and compare
+     
+
+
+                       

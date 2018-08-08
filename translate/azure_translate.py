@@ -1,10 +1,12 @@
+import http.client
+import json
 import logging
-import http.client, urllib.parse, uuid, json
 import os
+import uuid
 
 from translate import SOURCE_DIR, Translate
 
-TARGET_DIR = "azure_translated"
+TARGET_DIR = "../azure_translated"
 
 # AWS limit is 5000 char per call
 # 140 char per tweet * 30 = 4200

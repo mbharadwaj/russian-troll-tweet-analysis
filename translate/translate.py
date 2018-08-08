@@ -1,10 +1,9 @@
-import json
 import logging
 import time
 from os import listdir, mkdir
 from os.path import join, isfile, exists
 
-SOURCE_DIR = "categorized"
+SOURCE_DIR = "../categorized"
 
 # each tweet is 140 char * 100 chunk = 14000 char
 # google api limits 1,000,000 per 100 seconds

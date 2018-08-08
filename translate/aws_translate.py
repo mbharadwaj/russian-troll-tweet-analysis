@@ -5,7 +5,7 @@ import boto3
 
 from translate import SOURCE_DIR, Translate
 
-TARGET_DIR = "aws_translated"
+TARGET_DIR = "../aws_translated"
 
 # AWS limit is 5000 char per call
 # 140 char per tweet * 30 = 4200

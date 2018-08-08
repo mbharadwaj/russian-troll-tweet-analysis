@@ -5,7 +5,7 @@ from google.cloud import translate
 
 from translate import SOURCE_DIR, Translate
 
-TARGET_DIR = "gcp_translated"
+TARGET_DIR = "../gcp_translated"
 CHUNK_SIZE_FOR_GCP_TRANSLATE_API = 100
 
 # each tweet is 140 char * 100 chunk = 14000 char
@@ -21,40 +21,6 @@ class GoogleTranslate(object):
 
     def __init__(self):
         self.translate_client = translate.Client()
-
-    """
-    def translate_file(translate_client, source_filename):
-        with open(source_filename) as file:
-            logger.debug("processing %s", source_filename)
-            lines = file.readlines()
-            chunks = [lines[x:x + CHUNK_SIZE_FOR_TRANSLATE_API] for x in range(0, len(lines), CHUNK_SIZE_FOR_TRANSLATE_API)]
-            logger.debug("%s: chunk size=%s" % (source_filename, CHUNK_SIZE_FOR_TRANSLATE_API))
-            number_of_chunks = len(chunks)
-            logger.debug("%s: split %s lines in %s chunks" % (source_filename, len(lines), number_of_chunks))
-    
-            for index, chunk in enumerate(chunks):
-                chunk_number = index + 1
-    
-                translated_filename = source_filename.replace(SOURCE_DIR, TARGET_DIR) + "." + str(chunk_number)
-                translated_full_result_filename = translated_filename + ".full"
-    
-                if not exists(translated_filename):
-                    logger.debug("%s: processing chunk %s of %s..." % (source_filename, chunk_number, number_of_chunks))
-                    translations = translate_client.translate(chunk, target_language="en")
-                    save_translated_file(translations, translated_filename, translated_full_result_filename)
-                    time.sleep(SLEEP)
-                else:
-                    logger.debug("%s: skipping chunk %s of %s as it exists..." % (source_filename, chunk_number, number_of_chunks))
-    
-
-    def translate_and_save(filenames):
-        translate_client = translate.Client()
-
-        for source_filename in filenames:
-            translate_file(translate_client, source_filename, CHUNK_SIZE_FOR_TRANSLATE_API, TARGET_DIR)
-
-            time.sleep(SLEEP)
-    """
 
     def translate(self, values, target_language="en", source_language=None):
         if not source_language:
